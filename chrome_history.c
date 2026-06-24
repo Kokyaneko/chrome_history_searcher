@@ -11,19 +11,26 @@ typedef struct {
     int visit_count;//[2]
 } ChromeHistory;
 
+void file_exist_check(char* f_name){
+    //check exist file with fopen()
+    FILE *fp = fopen(f_name,"r");
+    if(fp==NULL){
+        puts("error:file does not exist.");
+        exit(1);
+    }else{
+        puts("File exists.");
+    }
+
+    fclose(fp);
+}
+
 int main(int argc,char *argv[]){
     if(argc != 2){
         puts("usage:chrome_history <file name>");
         return 1;
     }
 
-    //check exist file with fopen()
-    FILE *fp = fopen(argv[1],"r");
-    if(fp==NULL){
-        puts("error:file does not exist.");
-        return 1;
-    }
-    fclose(fp);
+    file_exist_check(argv[1]);
 
     sqlite3 *db;
     char *filename = argv[1];
@@ -33,6 +40,7 @@ int main(int argc,char *argv[]){
         perror("file open");
         return 1;
     }
+    else puts("File opned with SQLite.");
 
     // SQL compile
     sqlite3_stmt *stmt;
@@ -78,7 +86,8 @@ int main(int argc,char *argv[]){
         my_memory_db[i]->visit_count = sqlite3_column_int(stmt, 2);
 
         i++;
-    } 
+    }
+    printf("Loaded %d histories!\n",i);
 
     //close database
     sqlite3_finalize(stmt);
