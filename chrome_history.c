@@ -39,7 +39,7 @@ int main(int argc,char *argv[]){
     const char* com="SELECT url,title,visit_count FROM urls";
     
     if(sqlite3_prepare_v2(db, com, -1, &stmt, NULL) != SQLITE_OK) {
-        printf("Failed to prepare statement: %s\n", sqlite3_errmsg(db));
+        printf("Failed to prepare statement: %d\n", sqlite3_errmsg(db));
         sqlite3_close(db);
         return 1;
     }
@@ -48,13 +48,15 @@ int main(int argc,char *argv[]){
     int i=0;
 
     while(sqlite3_step(stmt) == SQLITE_ROW) {
-        if(i<MAX_HISTORY_NUMBER){
+        if(i>=MAX_HISTORY_NUMBER){
             printf("Loaded %s histories.",i+1);
             break;
         }
         // メモリを確保
         my_memory_db[i] = malloc(sizeof(ChromeHistory));
-    
+
+        //メモリへのコピー動作を関数にしてもいいのでは?
+
         //copy to memory
         //urls
         const char* url_data=(const char*)sqlite3_column_text(stmt, 0);
