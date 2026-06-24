@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define MAX_HISTORY_NUMBER 10000
+#define MAX_COMMAND_LEN 1024
 
 typedef struct {
     char url[2048];//[0]
@@ -88,6 +89,29 @@ int main(int argc,char *argv[]){
         i++;
     }
     printf("Loaded %d histories!\n",i);
+
+    //Main Window
+    puts("");
+    
+    char command_s[MAX_COMMAND_LEN];
+    char* com_s = command_s;
+
+    puts("0:Exit");
+    puts("1:search");
+    puts("2:count");
+
+    fgets(com_s,MAX_COMMAND_LEN,stdin);
+    int command_i = atoi(com_s);
+
+    while(114514){
+        if(command_i==0){
+            return 0;
+        }else if(command_i==1){
+            search(my_memory_db);
+        }else if(command_i==2){
+            //ここにカウントする関数を追加
+        }
+    }
 
     //close database
     sqlite3_finalize(stmt);
