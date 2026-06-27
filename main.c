@@ -116,10 +116,9 @@ int main(int argc,char *argv[]){
         }else if(com_i==1){
             search_m(my_memory_db,data_number);
         }else if(com_i==2){
-            //ここにカウントする関数を追加
+            count_m(my_memory_db,data_number); 
         }else{
             puts("Enter number 0-2");
-            continue;
         }
     }
 

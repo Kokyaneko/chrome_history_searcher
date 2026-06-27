@@ -1,6 +1,7 @@
 #pragma once
 
 #define URL_TITLE_LEN 2048
+#define DOMAIN_LEN 256
 
 typedef struct {
     char url[URL_TITLE_LEN];
