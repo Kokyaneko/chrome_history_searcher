@@ -2,15 +2,15 @@
 #include <sqlite3.h>
 #include <stdlib.h>
 #include <string.h>
+#include "struct.h"
 
 #define MAX_HISTORY_NUMBER 10000
 #define MAX_COMMAND_LEN 1024
+#define URL_TITLE_LEN 2048
 
-typedef struct {
-    char url[2048];//[0]
-    char title[1024];//[1]
-    int visit_count;//[2]
-} ChromeHistory;
+int search_u(char url[URL_TITLE_LEN],ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
+
+int search_m(ChromeHistory* dbs[10000],const int data_number);
 
 void file_exist_check(char* f_name){
     //check exist file with fopen()
@@ -48,7 +48,7 @@ int main(int argc,char *argv[]){
     const char* com="SELECT url,title,visit_count FROM urls";
     
     if(sqlite3_prepare_v2(db, com, -1, &stmt, NULL) != SQLITE_OK) {
-        printf("Failed to prepare statement: %d\n", sqlite3_errmsg(db));
+        printf("Failed to prepare statement: %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
         return 1;
     }
@@ -89,6 +89,7 @@ int main(int argc,char *argv[]){
         i++;
     }
     printf("Loaded %d histories!\n",i);
+    const int data_number = i;
 
     //Main Window
     puts("");
@@ -96,20 +97,27 @@ int main(int argc,char *argv[]){
     char command_s[MAX_COMMAND_LEN];
     char* com_s = command_s;
 
-    puts("0:Exit");
-    puts("1:search");
-    puts("2:count");
-
-    fgets(com_s,MAX_COMMAND_LEN,stdin);
-    int command_i = atoi(com_s);
+    puts("Wellcome to Chrome History DB!");
+    puts("");
 
     while(114514){
-        if(command_i==0){
+        puts("0:Exit");
+        puts("1:search");
+        puts("2:count");
+
+        printf("chrome history DB> ");
+        fgets(com_s,MAX_COMMAND_LEN,stdin);
+        int com_i = atoi(com_s);
+
+        if(com_i==0){
             return 0;
-        }else if(command_i==1){
-            search(my_memory_db);
-        }else if(command_i==2){
+        }else if(com_i==1){
+            search_m(my_memory_db,data_number);
+        }else if(com_i==2){
             //ここにカウントする関数を追加
+        }else{
+            puts("Enter number 0-2");
+            continue;
         }
     }
 
