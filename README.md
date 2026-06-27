@@ -1,8 +1,20 @@
-# chrome_history_searcher
+# Chrome_history_searcher
 
 ## 概要
 
 Chrome(Firefoxに互換性あり?)の閲覧履歴を表示・検索・分析するためのツールです。
+
+## How to build
+
+このプログラムをコンパイルするには、SQLite3の開発ライブラリが必要です。
+
+# Ubuntu / Debian の場合
+sudo apt update
+sudo apt install libsqlite3-dev
+
+その後、以下のコマンドでコンパイルし、実行ファイルを生成します。
+
+gcc -o chrome_history main.c search.c -lsqlite3
 
 ## 使い方
 
