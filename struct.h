@@ -7,3 +7,8 @@ typedef struct {
     char title[URL_TITLE_LEN];
     int visit_count;
 } ChromeHistory;
+
+typedef struct {
+    char domain[DOMAIN_LEN];
+    int count;
+} DomainCount;

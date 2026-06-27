@@ -31,9 +31,10 @@ ChromeOS : 開発者モードに移行後、ホームディレクトリからHis
 |機能名|説明|
 |--|--|
 |0.Exit|プログラムの終了|
-|1:search|URL,タイトルから検索(準備中)|
-|2:count|ドメインごとにカウント|
+|1:search|URL,タイトルから検索|
+|2:count|ドメインごとにカウント(準備中)|
 
-## 参考記事
+## その他・参考記事
+このコードの生成について、一部Gemini等AIの回答を参考にしています。
 
 https://qiita.com/maeharin/items/a2fb6242d26555c85dec - ブラウザの閲覧履歴で人生の棚卸し（embulk + elasticsearch + kibanaで可視化） #Elasticsearch - Qiita 
