@@ -98,13 +98,12 @@ int main(int argc,char *argv[]){
     sqlite3_close(db);
 
     //Main Window
-    puts("");
-    
     char command_s[MAX_COMMAND_LEN];
     char* com_s = command_s;
 
+    puts("======");
     puts("Wellcome to Chrome History DB!");
-    puts("");
+    puts("------");
 
     while(114514){
         puts("1:Exit");

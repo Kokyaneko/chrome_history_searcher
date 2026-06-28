@@ -1,3 +1,5 @@
 2026/06/28
-    Fixed main window's bug(If enter char into main window, program exit.)
+    Fixed main window's bug.(Bug:if enter char into main window, program exit.)
     Fixed visualance of search and count facility.
+
+    Todo : Add arrow system.
