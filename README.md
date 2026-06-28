@@ -16,7 +16,9 @@ sudo apt install libsqlite3-dev
 
 その後、以下のコマンドでコンパイルし、実行ファイルを生成します。
 
+```bash
 gcc -o chrome_history main.c search.c -lsqlite3
+```
 
 ## 使い方
 
