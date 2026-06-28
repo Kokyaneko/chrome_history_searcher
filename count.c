@@ -63,6 +63,7 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
         for(int j=0;j<domain_number;j++){
            printf("%s %d\n",domains[j].domain,domains[j].count); 
         }
+        puts("------");
     }else{
         puts("No URL counted");
     }

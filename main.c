@@ -18,7 +18,7 @@ void file_exist_check(char* f_name){
     //check exist file with fopen()
     FILE *fp = fopen(f_name,"r");
     if(fp==NULL){
-        puts("error:file does not exist.");
+        puts("Error:file does not exist.");
         exit(1);
     }else{
         puts("File exists.");
@@ -55,7 +55,7 @@ int main(int argc,char *argv[]){
         return 1;
     }
 
-    ChromeHistory* my_memory_db[10000]; // 1万件分のメモリ上のデータベース
+    ChromeHistory* my_memory_db[10000];//10000 columns
     int i=0;
 
     while(sqlite3_step(stmt) == SQLITE_ROW) {
@@ -93,6 +93,10 @@ int main(int argc,char *argv[]){
     printf("Loaded %d histories!\n",i);
     const int data_number = i;
 
+    //close database
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
+
     //Main Window
     puts("");
     
@@ -103,28 +107,26 @@ int main(int argc,char *argv[]){
     puts("");
 
     while(114514){
-        puts("0:Exit");
-        puts("1:search");
-        puts("2:count");
+        puts("1:Exit");
+        puts("2:search");
+        puts("3:count");
 
         printf("chrome history DB> ");
         fgets(com_s,MAX_COMMAND_LEN,stdin);
         int com_i = atoi(com_s);
 
         if(com_i==0){
-            return 0;
+            puts("Error : Enter number 1-2");
         }else if(com_i==1){
-            search_m(my_memory_db,data_number);
+            return 0;
         }else if(com_i==2){
+            search_m(my_memory_db,data_number);
+        }else if(com_i==3){
             count_m(my_memory_db,data_number); 
         }else{
-            puts("Enter number 0-2");
+            puts("Error : Enter number 1-2");
         }
     }
-
-    //close database
-    sqlite3_finalize(stmt);
-    sqlite3_close(db);
 
     for(int j=0;j<i;j++){
         free(my_memory_db[j]);
