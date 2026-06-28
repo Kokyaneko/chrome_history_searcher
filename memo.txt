@@ -1,6 +1,8 @@
 2026/06/28
-    Fixed main window's bug.(Bug:if enter char into main window, program exit.)
-    Fixed visualance of search and count facility.
-    Fixed file existance check funcition in main.c.(From using exit() to return)
+    -Fixed main window's bug.(Bug:if enter char into main window, program exit.)
+    -Fixed visualance of search and count facility.
+    -Fixed file existance check funcition in main.c.(From using exit() to return)
+    -Make define.h insted of struct.h
+     Move all macro into define.h
 
     Todo : Add arrow system.
