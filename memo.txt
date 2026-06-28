@@ -1,5 +1,6 @@
 2026/06/28
     Fixed main window's bug.(Bug:if enter char into main window, program exit.)
     Fixed visualance of search and count facility.
+    Fixed file existance check funcition in main.c.(From using exit() to return)
 
     Todo : Add arrow system.

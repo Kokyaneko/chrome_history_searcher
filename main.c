@@ -14,18 +14,20 @@ int search_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
 int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
-void file_exist_check(char* f_name){
+int file_exist_check(char* f_name){
     //check exist file with fopen()
     FILE *fp = fopen(f_name,"r");
+    
     if(fp==NULL){
-        puts("Error:file does not exist.");
-        exit(1);
-    }else{
-        puts("File exists.");
+        puts("Error:File does not exist.");
+        return 1;
     }
 
-    fclose(fp);
+        puts("File exists.");
+        fclose(fp);
+        return 0;
 }
+
 
 int main(int argc,char *argv[]){
     if(argc != 2){
@@ -33,7 +35,7 @@ int main(int argc,char *argv[]){
         return 1;
     }
 
-    file_exist_check(argv[1]);
+    if(file_exist_check(argv[1]) == 1) return 1;
 
     sqlite3 *db;
     char *filename = argv[1];
