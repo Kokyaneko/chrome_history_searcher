@@ -2,11 +2,10 @@
 #include <sqlite3.h>
 #include <stdlib.h>
 #include <string.h>
-#include "struct.h"
+#include "define.h"
 
-#define MAX_HISTORY_NUMBER 10000
-#define MAX_COMMAND_LEN 1024
-#define URL_TITLE_LEN 2048
+//MAX_HISTORY_NUMBER 10000
+//MAX_COMMAND_LEN 1024
 
 int search_r(char url[URL_TITLE_LEN],char title[URL_TITLE_LEN],ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 

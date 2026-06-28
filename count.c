@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-#include "struct.h"
+#include "define.h"
 
-#define MAX_HISTORY_NUMBER 10000
-#define MAX_DOMAINS 3000
-#define DOMAIN_LEN 256
+//MAX_HISTORY_NUMBER 10000
+//MAX_DOMAINS 3000
+//DOMAIN_LEN 256
 
 int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
     DomainCount domains[MAX_DOMAINS];
