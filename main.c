@@ -2,6 +2,8 @@
 #include <sqlite3.h>
 #include <stdlib.h>
 #include <string.h>
+#include <readline/readline.h>//For readline
+#include <readline/history.h>//For readline
 #include "define.h"
 
 //MAX_HISTORY_NUMBER 10000
@@ -27,6 +29,18 @@ int file_exist_check(char* f_name){
         return 0;
 }
 
+int line_input(){
+    char *input_line = NULL;
+    input_line = readline("chrome history DB> ");
+
+    if (input_line == NULL){
+        puts("Exit");
+        return -1;
+    }
+    if(strlen(input_line) > 0)add_history(input_line);
+        int output = atoi(input_line);
+        return output;
+}
 
 int main(int argc,char *argv[]){
     if(argc != 2){
@@ -56,7 +70,7 @@ int main(int argc,char *argv[]){
         return 1;
     }
 
-    ChromeHistory* my_memory_db[10000];//10000 columns
+    ChromeHistory* my_memory_db[MAX_HISTORY_NUMBER];
     int i=0;
 
     while(sqlite3_step(stmt) == SQLITE_ROW) {
@@ -75,7 +89,7 @@ int main(int argc,char *argv[]){
         if(url_data){
             strncpy(my_memory_db[i]->url,url_data,sizeof(my_memory_db[i]->url) - 1);
         }else{
-            strcpy(my_memory_db[i]->title, "");
+            strcpy(my_memory_db[i]->url, "");
         }
 
         //title
@@ -107,24 +121,20 @@ int main(int argc,char *argv[]){
     puts("------");
 
     while(114514){
-        puts("1:Exit");
-        puts("2:search");
-        puts("3:count");
+        puts("0:Exit");
+        puts("1:search");
+        puts("2:count");
 
-        printf("chrome history DB> ");
-        fgets(com_s,MAX_COMMAND_LEN,stdin);
-        int com_i = atoi(com_s);
-
-        if(com_i==0){
-            puts("Error : Enter number 1-2");
+        int com_i = line_input();
+        if(com_i == -1)break;
+        else if(com_i==0){
+            break;
         }else if(com_i==1){
-            return 0;
-        }else if(com_i==2){
             search_m(my_memory_db,data_number);
-        }else if(com_i==3){
+        }else if(com_i==2){
             count_m(my_memory_db,data_number); 
         }else{
-            puts("Error : Enter number 1-2");
+            puts("Error : Enter number 0-2");
         }
     }
 
