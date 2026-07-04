@@ -19,10 +19,10 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
 
     int i=0;
     for(i;i<data_number;i++){
-        if(strstr(dbs[i]->url,"file://") != NULL)continue;//ignore "file://"
+        if(strstr(dbs[i]->url,"file://") != NULL)continue;//ignore urls:"file://"
         const char *start = strstr(dbs[i]->url,"://");
         if(start){
-            start+=3;//advance the pointer as many as "://"
+            start+=3;//get forward the pointer as many as "://"
         }else{
             continue;
         }

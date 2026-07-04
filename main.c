@@ -9,10 +9,12 @@
 //MAX_HISTORY_NUMBER 10000
 //MAX_COMMAND_LEN 1024
 
+//in search.c
 int search_r(char url[URL_TITLE_LEN],char title[URL_TITLE_LEN],ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
 int search_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
+//in count.c
 int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
 int file_exist_check(char* f_name){
@@ -89,7 +91,7 @@ int main(int argc,char *argv[]){
         if(url_data){
             strncpy(my_memory_db[i]->url,url_data,sizeof(my_memory_db[i]->url) - 1);
         }else{
-            strcpy(my_memory_db[i]->url, "");
+            strcpy(my_memory_db[i]->url, "Blank URL");
         }
 
         //title
@@ -97,7 +99,7 @@ int main(int argc,char *argv[]){
         if(title_data){
             strncpy(my_memory_db[i]->title,title_data,sizeof(my_memory_db[i]->title) - 1);
         }else{
-            strcpy(my_memory_db[i]->title, "");
+            strcpy(my_memory_db[i]->title, "Blank title");
         }
 
         //visit_count
