@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <readline/readline.h>
 #include <string.h>
 #include "define.h"
 
@@ -35,13 +36,8 @@ int search_r(char url[URL_TITLE_LEN],char title[URL_TITLE_LEN],ChromeHistory* db
 }
 
 int search_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
-    char url[URL_TITLE_LEN],title[URL_TITLE_LEN];
-
-    printf("search URL:> ");
-    fgets(url,sizeof(url),stdin);
-   
-    printf("search Title:> ");
-    fgets(title,sizeof(title),stdin);
+    char * url = readline("search URL>");
+    char * title = readline("search title>");
 
     //disable "<input>\n"
     url[strcspn(url, "\n")] = '\0';
