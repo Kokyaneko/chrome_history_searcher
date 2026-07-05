@@ -10,5 +10,8 @@
     -Change main window(fgets -> readline)
     -Todo : In search.c, I have to change both way.
 
-
-
+2026/07/05
+    -In search.c, changed using function to get user input. (From fgets to readline)
+    -Fix bugs
+    -Todo : In count.c, add a function to show how many domains are counted.
+     some functions in main.c move into other code file.

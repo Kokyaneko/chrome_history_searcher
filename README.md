@@ -9,7 +9,7 @@ Chrome(Firefoxに互換性あり?)の閲覧履歴を表示・検索・分析す�
 このプログラムをコンパイルするには、SQLite3の開発ライブラリが必要です。
 
 ```bash
-#Ubuntu / Debian の場合
+#On Ubuntu/debian
 sudo apt update
 sudo apt install libsqlite3-dev
 

@@ -36,7 +36,6 @@ int line_input(){
     input_line = readline("chrome history DB> ");
 
     if (input_line == NULL){
-        puts("Exit");
         return -1;
     }
     if(strlen(input_line) > 0)add_history(input_line);
@@ -44,6 +43,9 @@ int line_input(){
         return output;
 }
 
+void main_w_com_error(void){
+    puts("Error : Enter number 0-2.");
+}
 int main(int argc,char *argv[]){
     if(argc != 2){
         puts("usage:chrome_history <file name>");
@@ -115,9 +117,6 @@ int main(int argc,char *argv[]){
     sqlite3_close(db);
 
     //Main Window
-    char command_s[MAX_COMMAND_LEN];
-    char* com_s = command_s;
-
     puts("======");
     puts("Wellcome to Chrome History DB!");
     puts("------");
@@ -128,15 +127,16 @@ int main(int argc,char *argv[]){
         puts("2:count");
 
         int com_i = line_input();
-        if(com_i == -1)break;
-        else if(com_i==0){
+        if(com_i == -1){
+            main_w_com_error();
+        }else if(com_i==0){
             break;
         }else if(com_i==1){
             search_m(my_memory_db,data_number);
         }else if(com_i==2){
             count_m(my_memory_db,data_number); 
         }else{
-            puts("Error : Enter number 0-2");
+            main_w_com_error();
         }
     }
 
