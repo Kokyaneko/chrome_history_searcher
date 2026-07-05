@@ -59,6 +59,7 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
 
     if(i!=0){
         puts("");
+        printf("%d domain(s) is(are) counted.\n",domain_number);
         printf("%d URL(s) counted.\n",i);
         puts("------");
         for(int j=0;j<domain_number;j++){

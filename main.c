@@ -36,16 +36,22 @@ int line_input(){
     input_line = readline("chrome history DB> ");
 
     if (input_line == NULL){
-        return -1;
+        free(input_line);
+        return 0;
     }
-    if(strlen(input_line) > 0)add_history(input_line);
+
+    if(strlen(input_line) > 0){
+        add_history(input_line);
         int output = atoi(input_line);
+        if(output==0)return -1;
         return output;
+    }
 }
 
 void main_w_com_error(void){
-    puts("Error : Enter number 0-2.");
+    puts("Error : Enter number 1-3.");
 }
+
 int main(int argc,char *argv[]){
     if(argc != 2){
         puts("usage:chrome_history <file name>");
@@ -79,7 +85,7 @@ int main(int argc,char *argv[]){
 
     while(sqlite3_step(stmt) == SQLITE_ROW) {
         if(i>=MAX_HISTORY_NUMBER){
-            printf("Loaded %s histories.",i+1);
+            printf("Loaded %d histories.",i+1);
             break;
         }
         // メモリを確保
@@ -122,9 +128,9 @@ int main(int argc,char *argv[]){
     puts("------");
 
     while(114514){
-        puts("0:Exit");
-        puts("1:search");
-        puts("2:count");
+        puts("1:Exit");
+        puts("2:search");
+        puts("3:count");
 
         int com_i = line_input();
         if(com_i == -1){
@@ -132,8 +138,10 @@ int main(int argc,char *argv[]){
         }else if(com_i==0){
             break;
         }else if(com_i==1){
-            search_m(my_memory_db,data_number);
+            break;
         }else if(com_i==2){
+            search_m(my_memory_db,data_number);
+        }else if(com_i==3){
             count_m(my_memory_db,data_number); 
         }else{
             main_w_com_error();
@@ -144,5 +152,7 @@ int main(int argc,char *argv[]){
         free(my_memory_db[j]);
     }
 
+    puts("Exit...");
+    puts("Thank you!");
     return 0;
 }
