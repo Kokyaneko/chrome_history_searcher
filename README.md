@@ -1,8 +1,10 @@
-# Chrome_history_searcher
+# Chrome history searcher (CHS)
 
 ## 概要
 
-Chrome(Firefoxに互換性あり?)の閲覧履歴を表示・検索・分析するためのツールです。
+Chrome(Firefoxに互換性あり?)の**閲覧履歴を表示・検索・分析**するためのツールです。
+
+略称はイニシャルを取ってCHSにしています。(一応)
 
 ## How to build
 
