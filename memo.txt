@@ -15,3 +15,6 @@
     -Fix bugs
     -Todo : In count.c, add a function to show how many domains are counted.
      some functions in main.c move into other code file.
+2026/07/08
+    -Fix bugs in main.c
+    Todo : Add making graph function
