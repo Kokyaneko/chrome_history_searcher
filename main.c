@@ -26,9 +26,9 @@ int file_exist_check(char* f_name){
         return 1;
     }
 
-        puts("File exists.");
-        fclose(fp);
-        return 0;
+     puts("File exists.");
+     fclose(fp);
+     return 0;
 }
 
 int line_input(){
@@ -88,7 +88,7 @@ int main(int argc,char *argv[]){
             printf("Loaded %d histories.",i+1);
             break;
         }
-        // メモリを確保
+        // set memorry(my_memory_db)
         my_memory_db[i] = malloc(sizeof(ChromeHistory));
 
         //メモリへのコピー動作を関数にしてもいいのでは?
@@ -115,12 +115,13 @@ int main(int argc,char *argv[]){
 
         i++;
     }
-    printf("Loaded %d histories!\n",i);
-    const int data_number = i;
 
     //close database
     sqlite3_finalize(stmt);
     sqlite3_close(db);
+
+    printf("Loaded %d histories!\n",i);
+    const int data_number = i;
 
     //Main Window
     puts("======");
