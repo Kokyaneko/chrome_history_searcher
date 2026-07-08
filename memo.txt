@@ -17,4 +17,5 @@
      some functions in main.c move into other code file.
 2026/07/08
     -Fix bugs in main.c
-    Todo : Add making graph function
+    -Todo : Add making graph function
+     Change function:search_m in count.c not to print result and do it other function (search_r?).
