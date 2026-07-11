@@ -16,3 +16,8 @@ typedef struct {
     char domain[DOMAIN_LEN];
     int count;
 } DomainCount;
+
+typedef struct {
+    char domain[DOMAIN_LEN];
+    int percent;
+} D_PER;
