@@ -39,10 +39,6 @@ int search_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
     char * url = readline("search URL>");
     char * title = readline("search title>");
 
-    //disable "<input>\n"
-    url[strcspn(url, "\n")] = '\0';
-    title[strcspn(title, "\n")] = '\0';
-
     search_r(url,title,dbs,data_number);
 
     return 0;
