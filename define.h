@@ -19,5 +19,5 @@ typedef struct {
 
 typedef struct {
     char domain[DOMAIN_LEN];
-    int percent;
+    float percent;
 } D_PER;

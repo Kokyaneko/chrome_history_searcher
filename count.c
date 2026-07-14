@@ -19,6 +19,7 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
 
     int i=0;
     for(i;i<data_number;i++){
+        if(dbs[i]==NULL)continue;//memory check
         if(strstr(dbs[i]->url,"file://") != NULL)continue;//ignore urls:"file://"
         const char *start = strstr(dbs[i]->url,"://");
         if(start){
@@ -42,7 +43,7 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
         domain[len] = '\0';
 
         int found_index=-1;
-        for(int ii=0;ii<MAX_DOMAINS;ii++){
+        for(int ii=0;ii<domain_number;ii++){
             if(strcmp(domain,domains[ii].domain) == 0){
                 found_index = ii;
                 break;
@@ -73,7 +74,7 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
         for(int j=0;j<domain_number;j++){
             strcpy(counted_per[j].domain , domains[j].domain);
             counted_per[j].percent = (domains[j].count * 100)/total;
-            printf("%s %d(%d%%)\n",domains[j].domain,domains[j].count,counted_per[j].percent); 
+            printf("%s %d(%.2f%%)\n",domains[j].domain,domains[j].count,counted_per[j].percent); 
         }
         puts("------");
         puts("");

@@ -19,3 +19,7 @@
     -Fix bugs in main.c
     -Todo : Add making graph function
      Change function:search_m in count.c not to print result and do it other function (search_r?).
+2026/07/15
+    -Fix calculating percentage program in count.c
+     It keeps having some bugs.(All data will be shown "0.00%".)
+    -Todo : Fix these bugs.
