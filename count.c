@@ -57,7 +57,12 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
         }
     }
 
-    D_PER *counted_per[domain_number];
+    D_PER counted_per[i];
+
+    int total=0;
+    for(int j=0;j<i;j++){
+        total += domains[j].count;
+    }
 
     if(i!=0){
         puts("");
@@ -66,12 +71,12 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
         puts("------");
 
         for(int j=0;j<domain_number;j++){
-            printf("%s %d\n",domains[j].domain,domains[j].count); 
-
-            counted_per[j]->domain = domains[j].domain;
-            counted_per[j]->percent = domains[j].count/i;
+            strcpy(counted_per[j].domain , domains[j].domain);
+            counted_per[j].percent = (domains[j].count * 100)/total;
+            printf("%s %d(%d%%)\n",domains[j].domain,domains[j].count,counted_per[j].percent); 
         }
         puts("------");
+        puts("");
     }else{
         puts("No URL counted");
     }
