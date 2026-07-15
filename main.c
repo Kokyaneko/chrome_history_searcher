@@ -46,6 +46,7 @@ int line_input(){
         if(output==0)return -1;
         return output;
     }
+    return -1;
 }
 
 void main_w_com_error(void){
