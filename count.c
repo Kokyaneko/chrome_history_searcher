@@ -60,11 +60,6 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
 
     D_PER counted_per[i];
 
-    int total=0;
-    for(int j=0;j<i;j++){
-        total += domains[j].count;
-    }
-
     if(i!=0){
         puts("");
         printf("%d domain(s) is(are) counted.\n",domain_number);
@@ -73,7 +68,7 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
 
         for(int j=0;j<domain_number;j++){
             strcpy(counted_per[j].domain , domains[j].domain);
-            counted_per[j].percent = (domains[j].count * 100)/total;
+            counted_per[j].percent = (domains[j].count * 100)/data_number;
             printf("%s %d(%.2f%%)\n",domains[j].domain,domains[j].count,counted_per[j].percent); 
         }
         puts("------");
