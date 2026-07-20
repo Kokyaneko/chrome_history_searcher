@@ -49,6 +49,7 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
                 break;
             }
         }
+
         if(found_index == -1 && domain_number < MAX_DOMAINS){
             strcpy(domains[domain_number].domain,domain);
             domains[domain_number].count += dbs[i]->visit_count;
