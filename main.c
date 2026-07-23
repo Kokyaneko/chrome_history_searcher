@@ -15,7 +15,7 @@ int search_r(char url[URL_TITLE_LEN],char title[URL_TITLE_LEN],ChromeHistory* db
 int search_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
 //in count.c
-int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
+D_PER count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
 int file_exist_check(char* f_name){
     //check exist file with fopen()
