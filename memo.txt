@@ -23,3 +23,7 @@
     -Fix calculating percentage program in count.c
      It keeps having some bugs.(All data will be shown "0.00%".)
     -Todo : Fix these bugs.
+2026/07/23
+    -Improve percentaging function in count.c.
+     Changed return type.(int -> D_PER*)
+    -Fix some bugs.
