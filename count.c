@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "define.h"
 
@@ -6,7 +7,7 @@
 //MAX_DOMAINS 3000
 //DOMAIN_LEN 256
 
-int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
+D_PER* count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
     DomainCount domains[MAX_DOMAINS];
     for(int i=0;i<MAX_DOMAINS;i++){
         //reset structure
@@ -59,24 +60,37 @@ int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number){
         }
     }
 
-    D_PER counted_per[i];
-
     if(i!=0){
         puts("");
         printf("%d domain(s) is(are) counted.\n",domain_number);
         printf("%d URL(s) counted.\n",i);
         puts("------");
 
-        for(int j=0;j<domain_number;j++){
-            strcpy(counted_per[j].domain , domains[j].domain);
-            counted_per[j].percent = (domains[j].count * 100)/data_number;
-            printf("%s %d(%.2f%%)\n",domains[j].domain,domains[j].count,counted_per[j].percent); 
+        int total_visits = 0;
+        for (int j = 0; j < data_number; j++) {
+            if(dbs[j] != NULL){
+                total_visits += dbs[j]->visit_count;
+            }
         }
+
+        D_PER *counted_per = malloc(sizeof(D_PER)*(i+1));
+
+        for(int k=0;k<domain_number;k++){
+            strcpy(counted_per[k].domain , domains[k].domain);
+            if(domains[k].count>0){
+                counted_per[k].percent = (float)(domains[k].count * 100)/total_visits;
+            }else{
+                counted_per[k].percent = 0.00;
+            }
+                printf("%s %d(%.2f%%)\n",domains[k].domain,domains[k].count,counted_per[k].percent); 
+        }
+
         puts("------");
         puts("");
-    }else{
-        puts("No URL counted");
-    }
 
-    return 0;
+        return counted_per;
+    }else{
+        puts("No URL(s) counted");
+        return NULL;
+    }
 }

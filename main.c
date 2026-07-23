@@ -43,7 +43,12 @@ int line_input(){
     if(strlen(input_line) > 0){
         add_history(input_line);
         int output = atoi(input_line);
-        if(output==0)return -1;
+        if(output==0){
+            if(strcmp(input_line,"q")==0){
+                return 0;
+            }
+            return -1;
+        }
         return output;
     }
     return -1;
