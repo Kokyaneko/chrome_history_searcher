@@ -17,19 +17,6 @@ int search_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 //in count.c
 D_PER count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
-int file_exist_check(char* f_name){
-    //check exist file with fopen()
-    FILE *fp = fopen(f_name,"r");
-    
-    if(fp==NULL){
-        puts("Error:File does not exist.");
-        return 1;
-    }
-
-     puts("File exists.");
-     fclose(fp);
-     return 0;
-}
 
 int line_input(){
     char *input_line = NULL;
@@ -63,8 +50,6 @@ int main(int argc,char *argv[]){
         puts("usage:chrome_history <file name>");
         return 1;
     }
-
-    if(file_exist_check(argv[1]) == 1) return 1;
 
     sqlite3 *db;
     char *filename = argv[1];
