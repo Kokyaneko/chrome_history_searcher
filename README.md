@@ -13,12 +13,12 @@ Chrome(Firefoxに互換性あり?)の**閲覧履歴を表示・検索・分析**
 ```bash
 #On Ubuntu/debian
 sudo apt update
-sudo apt install libsqlite3-dev
 
+sudo apt install libsqlite3-dev
 sudo apt install libreadline-dev
 ```
 
-その後、以下のコマンドでコンパイルし、実行ファイルを生成します。
+インストール後、以下のコマンドでコンパイルし、実行ファイルを生成します。
 
 ```bash
 gcc main.c count.c search.c -o chrome_history -lsqlite3 -lreadline
@@ -42,7 +42,7 @@ ChromeOS : ```/home/chronos/user/History``` (開発者モードへの移行が�
 |2:search|URL,タイトルから検索|
 |3:count|ドメインごとにカウント|
 
-```ctrl+D```でも終了できます。
+```ctrl+D``` ```q```でも終了できます。
 
 ## その他・参考記事
 このコードの生成について、一部Gemini等AIの回答を参考にしています。

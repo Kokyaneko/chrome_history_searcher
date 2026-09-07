@@ -15,21 +15,8 @@ int search_r(char url[URL_TITLE_LEN],char title[URL_TITLE_LEN],ChromeHistory* db
 int search_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
 //in count.c
-int count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
+D_PER count_m(ChromeHistory* dbs[MAX_HISTORY_NUMBER],const int data_number);
 
-int file_exist_check(char* f_name){
-    //check exist file with fopen()
-    FILE *fp = fopen(f_name,"r");
-    
-    if(fp==NULL){
-        puts("Error:File does not exist.");
-        return 1;
-    }
-
-     puts("File exists.");
-     fclose(fp);
-     return 0;
-}
 
 int line_input(){
     char *input_line = NULL;
@@ -43,9 +30,15 @@ int line_input(){
     if(strlen(input_line) > 0){
         add_history(input_line);
         int output = atoi(input_line);
-        if(output==0)return -1;
+        if(output==0){
+            if(strcmp(input_line,"q")==0){
+                return 0;
+            }
+            return -1;
+        }
         return output;
     }
+    return -1;
 }
 
 void main_w_com_error(void){
@@ -57,8 +50,6 @@ int main(int argc,char *argv[]){
         puts("usage:chrome_history <file name>");
         return 1;
     }
-
-    if(file_exist_check(argv[1]) == 1) return 1;
 
     sqlite3 *db;
     char *filename = argv[1];
@@ -81,15 +72,15 @@ int main(int argc,char *argv[]){
     }
 
     ChromeHistory* my_memory_db[MAX_HISTORY_NUMBER];
-    int i=0;
+    int data_number=0;
 
     while(sqlite3_step(stmt) == SQLITE_ROW) {
-        if(i>=MAX_HISTORY_NUMBER){
-            printf("Loaded %d histories.",i+1);
+        if(data_number>=MAX_HISTORY_NUMBER){
+            printf("Loaded %d histories.",data_number);
             break;
         }
         // set memorry(my_memory_db)
-        my_memory_db[i] = malloc(sizeof(ChromeHistory));
+        my_memory_db[data_number] = malloc(sizeof(ChromeHistory));
 
         //メモリへのコピー動作を関数にしてもいいのでは?
 
@@ -97,31 +88,30 @@ int main(int argc,char *argv[]){
         //urls
         const char* url_data=(const char*)sqlite3_column_text(stmt, 0);
         if(url_data){
-            strncpy(my_memory_db[i]->url,url_data,sizeof(my_memory_db[i]->url) - 1);
+            strncpy(my_memory_db[data_number]->url,url_data,sizeof(my_memory_db[data_number]->url) - 1);
         }else{
-            strcpy(my_memory_db[i]->url, "Blank URL");
+            strcpy(my_memory_db[data_number]->url, "Blank URL");
         }
 
         //title
         const char* title_data=(const char*)sqlite3_column_text(stmt, 1);
         if(title_data){
-            strncpy(my_memory_db[i]->title,title_data,sizeof(my_memory_db[i]->title) - 1);
+            strncpy(my_memory_db[data_number]->title,title_data,sizeof(my_memory_db[data_number]->title) - 1);
         }else{
-            strcpy(my_memory_db[i]->title, "Blank title");
+            strcpy(my_memory_db[data_number]->title, "Blank title");
         }
 
         //visit_count
-        my_memory_db[i]->visit_count = sqlite3_column_int(stmt, 2);
+        my_memory_db[data_number]->visit_count = sqlite3_column_int(stmt, 2);
 
-        i++;
+        data_number++;
     }
 
     //close database
     sqlite3_finalize(stmt);
     sqlite3_close(db);
 
-    printf("Loaded %d histories!\n",i);
-    const int data_number = i;
+    printf("Loaded %d histories!\n",data_number);
 
     //Main Window
     puts("======");
@@ -149,7 +139,7 @@ int main(int argc,char *argv[]){
         }
     }
 
-    for(int j=0;j<i;j++){
+    for(int j=0;j<data_number;j++){
         free(my_memory_db[j]);
     }
 
